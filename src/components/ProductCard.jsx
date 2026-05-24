@@ -1,13 +1,16 @@
-import {Typography} from "@mui/material";
+import { Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+//import productImage from '../assets/shop.png';
 
-const ProductCard = () => {
+export default function ProductCard({ product }) {
     return (
-        <div>
-            <Typography variant="h4" color="white" sx={{ mb: 4 }}>
-                Product Card
-            </Typography>
-        </div>
+        <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flexGrow: 1 }}>
+                <Typography variant="h6">{product.name}</Typography>
+                <Typography variant="body1" sx={{ my: 1 }}>${product.price}</Typography>
+                <Button variant="contained" fullWidth sx={{ mt: 1 }}>
+                    Add to Cart
+                </Button>
+            </CardContent>
+        </Card>
     );
 }
-
-export default ProductCard;
