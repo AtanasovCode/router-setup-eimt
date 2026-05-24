@@ -1,13 +1,7 @@
 import { Container, Grid, Typography } from "@mui/material";
 import ProductCard from "../components/ProductCard"
+import products from "../data/products";
 
-
-const products = [
-    { id: 1, name: "Laptop", price: 999 },
-    { id: 2, name: "Phone", price: 599 },
-    { id: 3, name: "Mouse", price: 199 },
-    { id: 4, name: "Keyboard", price: 299 },
-];
 
 const ProductList = () => {
     return (
