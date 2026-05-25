@@ -1,14 +1,54 @@
-import { AppBar, Typography, Toolbar } from "@mui/material";
+import { Link } from 'react-router-dom';
+import { AppBar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
 
 
-const Navbar = () => {
+const pages = [
+    { name: 'Products', path: '/' },
+    { name: 'Categories', path: '/categories' },
+    { name: 'Manufacturers', path: '/manufacturers' },
+];
+
+function Navbar() {
     return (
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant="h6">
-                    E-shop
-                </Typography>
-            </Toolbar>
+        <AppBar position="fixed">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                    <Typography
+                        variant="h6"
+                        component={Link}
+                        to="/"
+                        sx={{
+                            mr: 2,
+                            fontWeight: 700,
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        eShop
+                    </Typography>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page.name}
+                                component={Link}
+                                to={page.path}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                {page.name}
+                            </Button>
+                        ))}
+                    </Box>
+
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Cart">
+                            <IconButton component={Link} to="/cart" color="inherit">
+                                Shopping Cart Icon
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                </Toolbar>
+            </Container>
         </AppBar>
     );
 }
