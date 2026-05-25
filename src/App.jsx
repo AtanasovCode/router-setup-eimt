@@ -4,21 +4,16 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@mui/material'
 
 // Routes:
-import ProductList from './oages/ProductList'
-import ProductDetails from './oages/ProductDetails'
+import ProductList from './pages/ProductList'
+import ProductDetails from './pages/ProductDetails'
+import Navbar from './pages/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">
-            E-shop
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <Navbar />
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
