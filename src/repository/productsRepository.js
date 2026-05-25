@@ -5,7 +5,7 @@ const productsRepository = {
     findAll: async () => {
         return axiosInstance.get("/products")
     },
-    findById: async () => {
+    findById: async (id) => {
         return axiosInstance.get(`/products/${id}`)
     }
 }
