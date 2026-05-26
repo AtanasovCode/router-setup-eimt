@@ -7,6 +7,9 @@ const productsRepository = {
     },
     findById: async (id) => {
         return axiosInstance.get(`/products/${id}`)
+    },
+    delete: async (id) => {
+        return axiosInstance.delete(`/products/${id}`)
     }
 }
 

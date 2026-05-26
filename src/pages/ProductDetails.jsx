@@ -25,6 +25,19 @@ const ProductDetails = () => {
             .finally(() => setLoading(false))
     }, [id])
 
+
+    const handleDelete = async (id) => {
+        if (window.confirm(`Are you sure you want to delete product with id: ${id}?`)) {
+            try {
+                await productsRepository.delete(id)
+                navigate("/")
+            }
+            catch (e) {
+                console.error(`Failed to delete - ${e}`)
+            }
+        }
+    }
+
     if (notFound) {
         return (
             <Container sx={{ py: 5 }}>
@@ -50,6 +63,7 @@ const ProductDetails = () => {
                         <Typography variant="body1" sx={{ mb: 3 }}>{product.description}</Typography>
                         <Button variant="contained" sx={{ mr: 1 }}>Add to Cart</Button>
                         <Button variant="outlined" onClick={() => navigate("/")}>Back</Button>
+                        <Button variant="outlined" onClick={() => handleDelete(id)}>Delete Product</Button>
                     </Paper>
             }
         </Container>
