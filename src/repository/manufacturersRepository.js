@@ -2,7 +2,7 @@ import axiosInstance from "../axios/axios";
 
 
 const manufacturersRepository = {
-    findAll: async () => {
+    listAll: async () => {
         return await axiosInstance.get("/manufacturers")
     }
 }
