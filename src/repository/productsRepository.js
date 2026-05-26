@@ -10,6 +10,9 @@ const productsRepository = {
     },
     delete: async (id) => {
         return axiosInstance.delete(`/products/${id}`)
+    },
+    create: async (productCreate) => {
+        return axiosInstance.post("/products", productCreate)
     }
 }
 
