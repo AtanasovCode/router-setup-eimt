@@ -9,6 +9,7 @@ import ProductDetails from './pages/ProductDetails'
 import Navbar from './pages/Navbar'
 import CategoryList from './pages/CategoryList'
 import ManufacturerList from './pages/ManufacturerList'
+import ProductForm from './pages/ProductForm'
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/categories" element={<CategoryList />} />
         <Route path="/manufacturers" element={<ManufacturerList />} />
+        <Route path="/new-product" element={<ProductForm />} />
       </Routes>
     </BrowserRouter>
   );
