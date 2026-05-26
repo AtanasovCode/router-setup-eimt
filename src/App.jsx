@@ -8,6 +8,7 @@ import ProductList from './pages/ProductList'
 import ProductDetails from './pages/ProductDetails'
 import Navbar from './pages/Navbar'
 import CategoryList from './pages/CategoryList'
+import ManufacturerList from './pages/ManufacturerList'
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/categories" element={<CategoryList />} />
+        <Route path="/manufacturers" element={<ManufacturerList />} />
       </Routes>
     </BrowserRouter>
   );
