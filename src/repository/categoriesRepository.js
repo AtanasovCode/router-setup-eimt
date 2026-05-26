@@ -1,8 +1,7 @@
 import axiosInstance from "../axios/axios";
 
-
 const categoriesRepository = {
-    findAll: async () => {
+    listAll: async () => {
         return await axiosInstance.get("/categories")
     }
 }
