@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { AppBar, Box, Button, Container, IconButton, Toolbar, Tooltip, Typography } from '@mui/material';
+import { ShoppingBagIcon } from '@phosphor-icons/react';
 
 
 const pages = [
@@ -43,7 +44,11 @@ function Navbar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Cart">
                             <IconButton component={Link} to="/cart" color="inherit">
-                                Shopping Cart Icon
+                                <ShoppingBagIcon 
+                                    colo="#ffffff"
+                                    weight="fill"
+                                    size={36}
+                                />
                             </IconButton>
                         </Tooltip>
                     </Box>
