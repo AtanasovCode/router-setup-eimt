@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import categoriesRepository from "../repository/categoriesRepository";
 import manufacturersRepository from "../repository/manufacturersRepository";
 import productsRepository from "../repository/productsRepository";
-import { 
-    Container, 
-    Typography, 
-    TextField, 
-    Box, 
+import {
+    Container,
+    Typography,
+    TextField,
+    Box,
     MenuItem,
     Button
 } from "@mui/material";
 
 
 const ProductForm = () => {
+
+    const { id } = useParams()
+    const editMode = Boolean(id)
 
     const [product, setProduct] = useState({
         name: '',
@@ -36,11 +39,24 @@ const ProductForm = () => {
     useEffect(() => {
         Promise.all([
             categoriesRepository.listAll(),
-            manufacturersRepository.listAll()
+            manufacturersRepository.listAll(),
+            ...(editMode ? [productsRepository.findById(id)] : [])
         ])
-            .then(([categoriesResponse, manufacturersResponse]) => {
+            .then(([categoriesResponse, manufacturersResponse, productsResponse]) => {
                 setCategories(categoriesResponse.data)
                 setManufacturers(manufacturersResponse.data)
+
+                if (editMode && productsResponse) {
+                    const { name, price, quantity, category, manufacturer } = productsResponse.data
+                    setProduct({
+                        name,
+                        price,
+                        quantity,
+                        category_id: category?.id ?? '',
+                        manufacturer_id: manufacturer?.id ?? ''
+                    })
+                }
+
                 setNotFound(false)
             })
             .catch((e) => {
@@ -48,7 +64,7 @@ const ProductForm = () => {
                 setNotFound(true)
             })
             .finally(() => setLoading(false))
-    }, [])
+    }, [id])
 
 
     const handleSubmit = async (e) => {
@@ -76,6 +92,32 @@ const ProductForm = () => {
     }
 
 
+    const handleUpdate = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+
+        const payload = {
+            name: product.name,
+            price: parseFloat(product.price) || 0,
+            quantity: parseInt(product.quantity) || 0,
+            category_id: parseInt(product.category_id),
+            manufacturer_id: parseInt(product.manufacturer_id)
+        }
+
+        try {
+            await productsRepository.update(payload, id)
+            navigate("/")
+        }
+        catch (e) {
+            console.error(e)
+            setNotFound(true)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
+
 
 
     return (
@@ -93,7 +135,7 @@ const ProductForm = () => {
                                 :
                                 <Box
                                     component="form"
-                                    onSubmit={handleSubmit}
+                                    onSubmit={editMode ? handleUpdate : handleSubmit}
                                     sx={{ display: "flex", flexDirection: "column", gap: 2 }}
                                 >
                                     <Typography variant="h4" sx={{ mb: 2 }}>
@@ -169,7 +211,9 @@ const ProductForm = () => {
                                         }
                                     </TextField>
                                     <Button type="submit" variant="contained">
-                                        Submit
+                                        {
+                                            editMode ? "Update" : "Submit"
+                                        }
                                     </Button>
                                 </Box>
                         }

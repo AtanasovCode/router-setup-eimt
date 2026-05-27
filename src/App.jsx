@@ -31,6 +31,7 @@ function App() {
             <Route path="/categories" element={<CategoryList />} />
             <Route path="/manufacturers" element={<ManufacturerList />} />
             <Route path="/new-product" element={<ProductForm />} />
+            <Route path="/edit-product/:id" element={<ProductForm />} />
           </Routes>
         </Container>
       </BrowserRouter>

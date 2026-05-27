@@ -13,6 +13,9 @@ const productsRepository = {
     },
     create: async (productCreate) => {
         return axiosInstance.post("/products", productCreate)
+    },
+    update: async (productUpdate, id) => {
+        return axiosInstance.put(`/products/${id}`, productUpdate, id)
     }
 }
 
