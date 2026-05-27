@@ -191,6 +191,7 @@ const ProductForm = () => {
                                         onChange={handleChange}
                                         variant="filled"
                                         required
+                                        fullWidth
                                     >
                                         {
                                             categories.map((cat) => {
@@ -210,6 +211,7 @@ const ProductForm = () => {
                                         variant="filled"
                                         onChange={handleChange}
                                         required
+                                        fullWidth
 
                                     >
                                         {
@@ -222,7 +224,7 @@ const ProductForm = () => {
                                             })
                                         }
                                     </TextField>
-                                    <Button type="submit" variant="contained">
+                                    <Button fullWidth type="submit" variant="contained">
                                         {
                                             editMode ? "Update" : "Submit"
                                         }
