@@ -136,10 +136,22 @@ const ProductForm = () => {
                                 <Box
                                     component="form"
                                     onSubmit={editMode ? handleUpdate : handleSubmit}
-                                    sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                                    sx={{ 
+                                        width: "100%",
+                                        display: "flex", 
+                                        flexDirection: "column", 
+                                        gap: 3,
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
                                 >
                                     <Typography variant="h4" sx={{ mb: 2 }}>
-                                        Product Form
+                                        {
+                                            editMode ? 
+                                            "Update Product" 
+                                            :
+                                            "Create New Product"
+                                        }
                                     </Typography>
                                     <TextField
                                         name="name"
