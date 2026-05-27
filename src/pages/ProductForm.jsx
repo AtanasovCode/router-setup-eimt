@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import categoriesRepository from "../repository/categoriesRepository";
 import manufacturersRepository from "../repository/manufacturersRepository";
 import productsRepository from "../repository/productsRepository";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, TextField, Box } from "@mui/material";
 
 
 const ProductForm = () => {
@@ -20,6 +20,7 @@ const ProductForm = () => {
     const [manufacturers, setManufacturers] = useState([])
     const [manufacturerID, setManufacturerID] = useState()
     const [loading, setLoading] = useState(true)
+    const [notFound, setNotFound] = useState(false)
 
     const navigate = useNavigate()
 
@@ -35,8 +36,12 @@ const ProductForm = () => {
             .then(([categoriesResponse, manufacturersResponse]) => {
                 setCategories(categoriesResponse.data)
                 setManufacturers(manufacturersResponse.data)
+                setNotFound(false)
             })
-            .catch((e) => console.error(e))
+            .catch((e) => {
+                console.error(e)
+                setNotFound(true)
+            })
             .finally(() => setLoading(false))
     }, [])
 
@@ -69,16 +74,39 @@ const ProductForm = () => {
 
 
     return (
-        <Container>
+        <Container maxWidth="sm">
             {
                 loading ?
                     <Typography>Loading...</Typography>
                     :
-                    <Container>
-                        <Typography variant="h2" sx={{ m: 4 }}>
-                            Product Form
-                        </Typography>
-                    </Container>
+                    <Box>
+                        {
+                            notFound ?
+                                <Typography>
+                                    Error trying to fetch data :(
+                                </Typography>
+                                :
+                                <Box component="form" onSubmit={handleSubmit}>
+                                    <Typography variant="h4" sx={{ mb: 2 }}>
+                                        Product Form
+                                    </Typography>
+                                    <TextField
+                                        name="name"
+                                        label="Product Name"
+                                        variant="outlined"
+                                        type="text"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        required
+                                        sx={{ 
+                                            borderRadius: "12px",
+                                            padding: "5px",
+                                        }}
+                                    />
+
+                                </Box>
+                        }
+                    </Box>
             }
         </Container>
     );

@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { ThemeProvider, CssBaseline } from '@mui/material'
+import { theme } from './theme'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AppBar, Container, Toolbar, Typography } from '@mui/material'
@@ -18,18 +20,21 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Container sx={{ mt: 15 }}>
-        <Routes>
-          <Route path="/" element={<ProductList />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          <Route path="/categories" element={<CategoryList />} />
-          <Route path="/manufacturers" element={<ManufacturerList />} />
-          <Route path="/new-product" element={<ProductForm />} />
-        </Routes>
-      </Container>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Navbar />
+        <Container sx={{ mt: 15 }}>
+          <Routes>
+            <Route path="/" element={<ProductList />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route path="/categories" element={<CategoryList />} />
+            <Route path="/manufacturers" element={<ManufacturerList />} />
+            <Route path="/new-product" element={<ProductForm />} />
+          </Routes>
+        </Container>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
