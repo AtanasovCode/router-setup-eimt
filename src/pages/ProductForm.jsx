@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import categoriesRepository from "../repository/categoriesRepository";
 import manufacturersRepository from "../repository/manufacturersRepository";
 import productsRepository from "../repository/productsRepository";
-import { Container, Typography, TextField, Box } from "@mui/material";
+import { Container, Typography, TextField, Box, MenuItem } from "@mui/material";
 
 
 const ProductForm = () => {
@@ -86,24 +86,83 @@ const ProductForm = () => {
                                     Error trying to fetch data :(
                                 </Typography>
                                 :
-                                <Box component="form" onSubmit={handleSubmit}>
+                                <Box
+                                    component="form"
+                                    onSubmit={handleSubmit}
+                                    sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+                                >
                                     <Typography variant="h4" sx={{ mb: 2 }}>
                                         Product Form
                                     </Typography>
                                     <TextField
                                         name="name"
                                         label="Product Name"
-                                        variant="outlined"
+                                        value={product.name}
+                                        variant="filled"
                                         type="text"
                                         onChange={handleChange}
                                         fullWidth
                                         required
-                                        sx={{ 
-                                            borderRadius: "12px",
-                                            padding: "5px",
-                                        }}
                                     />
+                                    <TextField
+                                        name="price"
+                                        label="Price"
+                                        value={product.price}
+                                        variant="filled"
+                                        type="number"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        required
+                                    />
+                                    <TextField
+                                        name="quantity"
+                                        label="Quantity"
+                                        value={product.quantity}
+                                        variant="filled"
+                                        type="number"
+                                        onChange={handleChange}
+                                        fullWidth
+                                        required
+                                    />
+                                    <TextField
+                                        name="category_id"
+                                        label="Category"
+                                        select
+                                        value={product.category_id}
+                                        onChange={handleChange}
+                                        variant="filled"
+                                        required
+                                    >
+                                        {
+                                            categories.map((cat) => {
+                                                return (
+                                                    <MenuItem key={cat.id} value={cat.id}>
+                                                        {cat.name}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </TextField>
+                                    <TextField
+                                        name="manufacturer_id"
+                                        label="Manufacturer"
+                                        select
+                                        value={product.manufacturer_id}
+                                        variant="filled"
+                                        onChange={handleChange}
+                                        required
 
+                                    >
+                                        {
+                                            manufacturers.map((man) => {
+                                                return (
+                                                    <MenuItem key={man.id} value={man.id}>
+                                                        {man.name}
+                                                    </MenuItem>
+                                                );
+                                            })
+                                        }
+                                    </TextField>
                                 </Box>
                         }
                     </Box>
