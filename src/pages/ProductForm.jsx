@@ -69,7 +69,7 @@ const ProductForm = () => {
 
 
     return (
-        <Container sx={{ mt: 10 }}>
+        <Container>
             {
                 loading ?
                     <Typography>Loading...</Typography>

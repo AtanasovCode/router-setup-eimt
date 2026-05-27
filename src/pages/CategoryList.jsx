@@ -22,7 +22,7 @@ const CategoryList = () => {
 
 
     return (
-        <Container sx={{ mt: 10 }}>
+        <Container>
             {
                 loading ?
                     <Container>

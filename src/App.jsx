@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { AppBar, Toolbar, Typography } from '@mui/material'
+import { AppBar, Container, Toolbar, Typography } from '@mui/material'
 
 // Routes:
 import ProductList from './pages/ProductList'
@@ -20,13 +20,15 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<ProductList />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/categories" element={<CategoryList />} />
-        <Route path="/manufacturers" element={<ManufacturerList />} />
-        <Route path="/new-product" element={<ProductForm />} />
-      </Routes>
+      <Container sx={{ mt: 15 }}>
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
+          <Route path="/categories" element={<CategoryList />} />
+          <Route path="/manufacturers" element={<ManufacturerList />} />
+          <Route path="/new-product" element={<ProductForm />} />
+        </Routes>
+      </Container>
     </BrowserRouter>
   );
 }
