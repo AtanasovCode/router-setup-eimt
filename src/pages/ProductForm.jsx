@@ -3,7 +3,14 @@ import { useNavigate } from "react-router-dom";
 import categoriesRepository from "../repository/categoriesRepository";
 import manufacturersRepository from "../repository/manufacturersRepository";
 import productsRepository from "../repository/productsRepository";
-import { Container, Typography, TextField, Box, MenuItem } from "@mui/material";
+import { 
+    Container, 
+    Typography, 
+    TextField, 
+    Box, 
+    MenuItem,
+    Button
+} from "@mui/material";
 
 
 const ProductForm = () => {
@@ -16,9 +23,7 @@ const ProductForm = () => {
         manufacturer_id: ''
     })
     const [categories, setCategories] = useState([])
-    const [categoryID, setCategoryID] = useState()
     const [manufacturers, setManufacturers] = useState([])
-    const [manufacturerID, setManufacturerID] = useState()
     const [loading, setLoading] = useState(true)
     const [notFound, setNotFound] = useState(false)
 
@@ -163,6 +168,9 @@ const ProductForm = () => {
                                             })
                                         }
                                     </TextField>
+                                    <Button type="submit" variant="contained">
+                                        Submit
+                                    </Button>
                                 </Box>
                         }
                     </Box>
